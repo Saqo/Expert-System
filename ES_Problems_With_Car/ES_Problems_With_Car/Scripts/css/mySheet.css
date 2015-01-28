@@ -1,0 +1,130 @@
+﻿body {
+}
+
+.list-group {
+    padding: 10px;
+}
+
+.list-group-item {
+    text-align: right;
+    min-height: 10px;
+}
+
+.btn {
+}
+
+.unvisible {
+    display: none;
+}
+
+.visible {
+    display: inline-block;
+}
+
+.selected {
+    background: #EEE9E9;
+}
+
+#menu li {
+    display: inline-block;
+}
+
+#menu {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    padding: 5px 5px 0 0;
+    text-align: right;
+}
+
+btn-create {
+    display: inline !important;
+}
+
+fieldset {
+}
+
+    fieldset ou li {
+        display: inline;
+    }
+
+
+.h1 {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+
+.body_posititon {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.footer_position {
+    display: block;
+    margin: auto 0;
+}
+
+.submit-disable {
+    visibility: hidden;
+}
+
+.submit-active {
+    visibility: visible;
+    margin-top: 10px;
+}
+
+    .submit-active a input {
+        width: 120px;
+    }
+
+
+.custom-table {
+    margin: auto;
+}
+
+    .custom-table tr {
+    }
+
+        .custom-table tr td {
+            float: left;
+            padding: 2px;
+            vertical-align: middle;
+        }
+
+            .custom-table tr td input {
+                margin: auto;
+                vertical-align: middle;
+            }
+
+            .custom-table tr td span {
+                margin: auto;
+                vertical-align: middle;
+            }
+
+.custom-list {
+    list-style: none;
+}
+
+fieldset a {
+    color: black;
+}
+
+    fieldset a:hover {
+        color: black;
+    }
+
+
+.link-GoTo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 0 0 5px;
+}

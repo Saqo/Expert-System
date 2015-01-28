@@ -1,0 +1,38 @@
+﻿@model  ES_Problems_With_Car.Car_Systems
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Создание новой учетной записи.</h2>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Форма регистрации</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.IsSelected)
+                @Html.CheckBoxFor(m => m.IsSelected)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.WasViewed)
+                @Html.CheckBoxFor(m => m.WasViewed)
+            </li>
+        </ol>
+        <input type="submit" value="Регистрация" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

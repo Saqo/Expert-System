@@ -1,0 +1,15 @@
+﻿@model ES_Problems_With_Car.Car_Defects
+
+@{
+    ViewBag.Title = "GetAnswer";
+}
+
+@if (Model != null)
+{
+    <h3>Неисправность: @Model.Answer</h3>
+}
+else
+{
+    <h3>В системе нет неисправноти по указанным (-ому) признакам (-у)</h3>
+}
+<h2>@Html.ActionLink("Начать заново", "Index", "User")</h2>

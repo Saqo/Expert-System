@@ -1,0 +1,46 @@
+﻿@model ES_Problems_With_Car.Car_System_Nodes
+
+@{
+    ViewBag.Title = "Узлы выбранной системы автомобиля";
+    var label = "Название узла";
+}
+
+@if (ViewData["system"] != null)
+{
+    ES_Problems_With_Car.Car_Systems system = ViewData["system"] as ES_Problems_With_Car.Car_Systems;
+    <span class="link-GoTo">@Html.ActionLink("< К ВЫБОРУ СИСТЕМ", "CreateSystem", "Editor")</span>
+    <div>
+        <p>Текущая система автомобиля: @Html.DisplayFor(x => system.Name)</p>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <ol class="custom-list">
+            <li>
+                @Html.Label(label)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+        </ol>
+        <input type="submit" value="Создать узел" />
+    </fieldset>
+}
+
+@if (ViewData["nodes"] != null)
+{
+    <ul class="list-group">
+
+        @foreach (var node in ViewData["nodes"] as List<ES_Problems_With_Car.Car_System_Nodes>)
+        {
+            <li class="list-group-item" onclick="showBtns(this,@node.ID)">
+                <button class="btn btn-default unvisible @node.ID" onclick="btnClick(@node.ID,'node')">Выбрать</button>
+                <button class="btn btn-default unvisible @node.ID" onclick="updateElem(@node.ID)">Изменить</button>
+                <button class="btn btn-default unvisible @node.ID" onclick="deleteElem(@node.ID)">Удалить</button>
+                @Html.DisplayFor(x => node.Name)
+            </li>
+        }
+    </ul>
+}

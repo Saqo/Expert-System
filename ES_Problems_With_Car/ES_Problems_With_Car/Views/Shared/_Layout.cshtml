@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title — приложение ASP.NET MVC</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="@Url.Content("~/Scripts/bootstrap-3.1.1-dist/css/bootstrap-theme.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Scripts/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Scripts/bootstrap-3.1.1-dist/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Scripts/css/mySheet.css")" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css", "~/Scripts/bootstrap-3.1.1-dist/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+        //        debugger;
+        function showBtns(obj, elemId) {
+            //            debugger;
+            if (!obj.selected) {
+                var listofLi = (obj.parentNode).getElementsByTagName('li');
+                for (i = 0; i < listofLi.length; i++) {
+                    listofLi[i].className = "list-group-item";
+                    listofLi[i].selected = false;
+                    classBtnsToggle(listofLi[i], "set", elemId);
+                }
+                obj.className += " selected";
+                obj.selected = true;
+                classBtnsToggle(obj, "toggle", elemId);
+            }
+
+            //alert('onclick fired');
+        }
+
+        function classBtnsToggle(container, option, elemId) {
+            btns = container.getElementsByTagName('button');
+            for (j = 0; j < btns.length; j++) {
+                if (btns[j].className.indexOf('unvisible') > -1 && option == "toggle")
+                    btns[j].className = "btn btn-default visible " + elemId;
+                else btns[j].className = "btn btn-default unvisible";
+            }
+        }
+
+        function btnClick(selectedPreviousEllemID, selectedPreviousElem) {
+            //            debugger;
+
+            actionUrl = "@Url.Action("Create" + ViewData["nextStepURL"], "Editor")";
+            window.location.href = actionUrl + "?" + selectedPreviousElem + "ID=    " + selectedPreviousEllemID;
+
+            stopPropagation();
+        }
+
+        function deleteElem(id) {
+            actionUrl = "@Url.Action("Delete"+ViewData["currentStepURL"],"Editor")";
+            window.location.href = actionUrl + "?id=" + id;
+            stopPropagation();
+        }
+
+        function updateElem(id) {
+            actionUrl = "@Url.Action("Update" + ViewData["currentStepURL"], "Editor")";
+            window.location.href = actionUrl + "?id=" + id;
+            stopPropagation();
+        }
+
+
+        function stopPropagation(event) {
+            event = event || window.event;
+            event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
+        }
+
+        function toogle_SubmitBtn_State(id) {
+            //           debugger
+            var btn = document.getElementById(id);
+            btn.removeAttribute("disabled");
+            btn.className = "submit-active";
+            //   alert('i am here');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="float-right">
+            @{
+                var controller = ViewContext.Controller;
+                var mode = (controller.ToString() == "ES_Problems_With_Car.Controllers.EditorController") ? "пользователя" : "редактирования";
+            }
+            @Html.ActionLink("Перейти в режим  " + mode, "Index", (controller.ToString() == "ES_Problems_With_Car.Controllers.EditorController") ? "User" : "Editor")
+        </div>
+    </header>
+    <div id="body" class="body_posititon">
+        <h1 class="">@ViewData["h1"]</h1>
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    @*<footer class="footer_position">
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year — приложение ASP.NET MVC</p>
+                </div>
+            </div>
+        </footer>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

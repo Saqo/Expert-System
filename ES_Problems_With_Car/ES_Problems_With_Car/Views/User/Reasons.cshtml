@@ -1,0 +1,52 @@
+﻿@model  ES_Problems_With_Car.Defect_Reasons
+
+@{
+    ViewBag.Title = "Reasons";
+}
+
+
+<h4>Система: @ViewData["CurrentSystem"]</h4>
+<h4>Узел: @ViewData["CurrentNode"]</h4>
+@if (Model == null)
+{
+
+    <p>Таблица узлов системы автомобиля пуста</p>
+    <p>
+        @Html.ActionLink("Добавить узел", "CreateNode", "Editor")
+    </p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+
+        <h1 class="h1">@Html.DisplayFor(x => Model.Label) ?</h1>
+        @Html.HiddenFor(x => Model.WasViewed)
+        @Html.HiddenFor(x => Model.IsSelected)
+
+        <div class="submit-active">
+            <a href="@Url.Action("GetAnswer", "User", new { id = Model.ID })"><input type="button" value="Да" /></a>
+            <a href="@Url.Action("Reasons", "User", new { id = Model.NodeID, previousReasonID = Model.PreviousReasonsID, SelectedNodInPreviousStep = ViewData["NodeWasSelected"], SystemWasSelected = ViewData["SystemWasSelected"], SearchDefectInThisNode = true })"><input type="button" value="Нет" /></a>
+            <a href="@Url.Action("Reasons", "User", new { id = Model.NodeID, previousReasonID = Model.ID, dontKnow = true, SelectedNodInPreviousStep = ViewData["NodeWasSelected"], SystemWasSelected = ViewData["SystemWasSelected"], SearchDefectInThisNode = false })"><input type="button" value="Не знаю" /></a>
+        </div>
+        @*<table>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Label)
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.RadioButton("SelectedReason", item.ID)
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                }
+            </table>*@
+    }
+}

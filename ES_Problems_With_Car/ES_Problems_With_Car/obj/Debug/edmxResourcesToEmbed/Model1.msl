@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Exper_System_dbModelContainer" CdmEntityContainer="Exper_System_dbEntities">
+    <EntitySetMapping Name="Car_Defects">
+      <EntityTypeMapping TypeName="Exper_System_dbModel.Car_Defects">
+        <MappingFragment StoreEntitySet="Car_Defects">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ReasonID" ColumnName="ReasonID" />
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="WasViewed" ColumnName="WasViewed" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Car_System_Nodes">
+      <EntityTypeMapping TypeName="Exper_System_dbModel.Car_System_Nodes">
+        <MappingFragment StoreEntitySet="Car_System_Nodes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SystemID" ColumnName="SystemID" />
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+          <ScalarProperty Name="WasViewed" ColumnName="WasViewed" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Car_Systems">
+      <EntityTypeMapping TypeName="Exper_System_dbModel.Car_Systems">
+        <MappingFragment StoreEntitySet="Car_Systems">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+          <ScalarProperty Name="WasViewed" ColumnName="WasViewed" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Defect_Reasons">
+      <EntityTypeMapping TypeName="Exper_System_dbModel.Defect_Reasons">
+        <MappingFragment StoreEntitySet="Defect_Reasons">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+          <ScalarProperty Name="DiagnosisID" ColumnName="DiagnosisID" />
+          <ScalarProperty Name="PreviousReasonsID" ColumnName="PreviousReasonsID" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+          <ScalarProperty Name="WasViewed" ColumnName="WasViewed" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reasons_Correction_Methods">
+      <EntityTypeMapping TypeName="Exper_System_dbModel.Reasons_Correction_Methods">
+        <MappingFragment StoreEntitySet="Reasons_Correction_Methods">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DefectID" ColumnName="DefectID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reasons_Diagnosis">
+      <EntityTypeMapping TypeName="Exper_System_dbModel.Reasons_Diagnosis">
+        <MappingFragment StoreEntitySet="Reasons_Diagnosis">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

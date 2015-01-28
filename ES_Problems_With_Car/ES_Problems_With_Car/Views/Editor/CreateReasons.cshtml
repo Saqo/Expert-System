@@ -1,0 +1,67 @@
+﻿@model ES_Problems_With_Car.Defect_Reasons
+
+@{
+    var label = "Признак неисправности";
+}
+@using ES_Problems_With_Car.Models
+
+@if (ViewData["node"] != null)
+{
+    ES_Problems_With_Car.Car_System_Nodes node = ViewData["node"] as ES_Problems_With_Car.Car_System_Nodes;
+    <span class="link-GoTo">@Html.ActionLink("< К ВЫБОРУ УЗЛОВ", "CreateNode", new { systemID = node.SystemID })</span>
+    <div>
+        <p>Текущий узел автомобиля: @Html.DisplayFor(x => node.Name)</p>
+        @if (ViewData["PreviousReasonLabel"] != "")
+        {
+            <p>Предыдущий признак неисправности: @Html.DisplayFor(x => ViewData["PreviousReasonLabel"])</p>
+        }
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <ol class="custom-list">
+            <li>
+                @Html.Label(label)
+                @Html.TextBoxFor(m => m.Label)
+
+            </li>
+        </ol>
+        @if (Extensions.HasKeyInKeys(Request.Params, "PreviousReasonID") == true)
+        {
+            @Html.Hidden("PreviousReasonsID", ViewData["PreviousReasonsID"])
+        }
+
+        <input type="submit" value="Создать признак" />
+    </fieldset>
+}
+@if (ViewData["reasons"] != null)
+{
+    <ul class="list-group">
+
+        @foreach (var reason in ViewData["reasons"] as List<ES_Problems_With_Car.Defect_Reasons>)
+        {
+            <li class="list-group-item" onclick="showBtns(this,@reason.ID)">
+                <button class="btn btn-default unvisible @reason.ID" onclick="btnClick(@reason.ID,'reason')">Добавить неисправность</button>
+                <button class="btn btn-default unvisible @reason.ID" onclick="btn_AddClarifyingQuestion(@reason.ID,'node',@reason.NodeID,'Reasons')">Добавить уточняющий признак</button>
+                <button class="btn btn-default unvisible @reason.ID">Добавить метод диагностики</button>
+                <button class="btn btn-default unvisible @reason.ID">добавить...</button>
+                <button class="btn btn-default unvisible @reason.ID" onclick="updateElem(@reason.ID)">Изменить</button>
+                <button class="btn btn-default unvisible @reason.ID" onclick="deleteElem(@reason.ID)">Удалить</button>
+                @Html.DisplayFor(x => reason.Label)
+            </li>
+        }
+    </ul>
+}
+<script>
+    function btn_AddClarifyingQuestion(PreviousReasonID, PreviousStepType, NodeID, nextStepUrl) {
+//        debugger;
+        actionUrl = "/Editor/Create" + nextStepUrl;
+
+        window.location.href = actionUrl + "?" + PreviousStepType + "ID= " + NodeID + "&PreviousReasonID=" + PreviousReasonID;
+
+        stopPropagation();
+    }
+</script>

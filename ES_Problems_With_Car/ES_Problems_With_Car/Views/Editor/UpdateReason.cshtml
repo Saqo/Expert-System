@@ -1,0 +1,34 @@
+﻿@model ES_Problems_With_Car.Defect_Reasons
+
+@{
+    ViewBag.Title = "UpdateReason";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Форма редактирования</legend>
+        <ol class="custom-list">
+            <li>
+                @Html.LabelFor(m => m.ID)
+                @Html.DisplayTextFor(m => m.ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Label)
+                @Html.TextBoxFor(m => m.Label)
+            </li>
+            @Html.HiddenFor(m => m.NodeID)
+            @Html.HiddenFor(m => m.PreviousReasonsID)
+            @Html.HiddenFor(m => m.WasViewed)
+            @Html.HiddenFor(m => m.IsSelected)
+            @Html.HiddenFor(m => m.IsDeleted)
+        </ol>
+        <div class="submit-active">
+            <a href="@Url.Action("CancelUpdateReason", new { id = Model.ID })"><input type="button" value="Отмена" /></a>
+            <input type="submit" value="Обновить узел" />
+        </div>
+    </fieldset>
+}
+

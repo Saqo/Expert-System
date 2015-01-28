@@ -1,0 +1,33 @@
+﻿@model ES_Problems_With_Car.Reasons_Correction_Methods
+
+@{
+    ViewBag.Title = "UpdateCorrection_Method";
+    var id = "Идентификатор";
+    var answer = "Способ устранения неисправности";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Форма редактирования</legend>
+        <ol class="custom-list">
+            <li>
+                @Html.Label(id)
+                @Html.DisplayTextFor(m => m.ID)
+            </li>
+            <li>
+                @Html.Label(answer)
+                @Html.TextBoxFor(m => m.Answer)
+            </li>
+            @Html.HiddenFor(m => m.DefectID)
+            @Html.HiddenFor(m => m.IsDeleted)
+        </ol>
+        <div class="submit-active">
+            <a href="@Url.Action("CancelUpdateCorrection_Method", new { id = Model.ID })"><input type="button" value="Отмена" /></a>
+            <input type="submit" value="Обновить узел" />
+        </div>
+    </fieldset>
+}
+

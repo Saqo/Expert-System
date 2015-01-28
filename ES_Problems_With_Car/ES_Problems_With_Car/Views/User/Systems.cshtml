@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ES_Problems_With_Car.Car_Systems>
+
+@{
+    ViewBag.Title = "Systems";
+    var @class = "systems_rb";
+    var submitID = "systemSubmit";
+}
+
+@if (Model == null)
+{
+    <p>Таблица систем автомобиля пуста</p>
+    <p>
+        @Html.ActionLink("Добавить систему", "CreateSystem", "Editor")
+    </p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        <table class="custom-table">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButton("Systems", item.ID, new { @class = @class, id = "system" + item.ID, onclick = "toogle_SubmitBtn_State('" + submitID + "')" }) <span>@Html.DisplayFor(x => item.Name)</span>
+                    </td>
+
+                </tr>
+                @Html.HiddenFor(x => item.WasViewed)
+                @Html.HiddenFor(x => item.IsSelected)
+
+            }
+            <tr>
+                <td>
+                    @Html.RadioButton("Systems", "Dont know", new { @class = @class, id = "systemDontKnow", onclick = "toogle_SubmitBtn_State('" + submitID + "')" }) <span>Затрудняюсь ответить</span>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" id="systemSubmit" disabled="disabled" class="submit-disable" value="Выбрать" />
+    }
+}

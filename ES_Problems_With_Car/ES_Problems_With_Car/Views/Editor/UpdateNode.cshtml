@@ -1,0 +1,35 @@
+﻿@model ES_Problems_With_Car.Car_System_Nodes
+
+@{
+    ViewBag.Title = "UpdateNode";
+    var id = "Идентификатор";
+    var answer = "Название узла системы";
+}
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Форма редактирования</legend>
+        <ol class="custom-list">
+            <li>
+                @Html.Label(id)
+                @Html.DisplayTextFor(m => m.ID)
+            </li>
+            <li>
+                @Html.Label(answer)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+            @Html.HiddenFor(m => m.SystemID)
+            @Html.HiddenFor(m => m.WasViewed)
+            @Html.HiddenFor(m => m.IsSelected)
+            @Html.HiddenFor(m => m.IsDeleted)
+        </ol>
+        <div class="submit-active">
+            <a href="@Url.Action("CancelUpdateNode", new { id = Model.ID })"><input type="button" value="Отмена" /></a>
+            <input type="submit" value="Обновить узел" />
+        </div>
+    </fieldset>
+}

@@ -1,0 +1,35 @@
+﻿@model ES_Problems_With_Car.Car_Systems
+
+@{
+    var label = "Название системы";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <ol class="custom-list">
+            <li>
+                @Html.Label(label)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+        </ol>
+        <input class="btn-create" type="submit" value="Создать систему" />
+    </fieldset>
+}
+
+@if (ViewData["systems"] != null)
+{
+    <ul class="list-group">
+
+        @foreach (var system in ViewData["systems"] as List<ES_Problems_With_Car.Car_Systems>)
+        {
+            <li class="list-group-item" onclick="showBtns(this,@system.ID)">
+                <button class="btn btn-default unvisible @system.ID" onclick="btnClick(@system.ID,'system')">Выбрать</button>
+                <button class="btn btn-default unvisible @system.ID" onclick="updateElem(@system.ID)">Изменить</button>
+                <button class="btn btn-default unvisible @system.ID" onclick="deleteElem(@system.ID)">Удалить</button>
+                @Html.DisplayFor(x => system.Name)
+            </li>
+        }
+    </ul>
+}

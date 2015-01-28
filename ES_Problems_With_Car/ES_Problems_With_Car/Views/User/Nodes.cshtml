@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ES_Problems_With_Car.Car_System_Nodes>
+
+@{
+    ViewBag.Title = "Nodes";
+    var @class = "nodes_rb";
+    var submitID = "nodeSubmit";
+}
+
+@if (Model == null)
+{
+    <p>Таблица узлов системы автомобиля пуста</p>
+    <p>
+        @Html.ActionLink("Добавить узел", "CreateNode", "Editor")
+    </p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        <table class="custom-table">
+            @foreach (var item in Model)
+            {
+                <tr class="tr">
+                    <td>
+                        @Html.RadioButton("SelectedNode", item.ID, new { @class = @class, id = "node" + item.ID, onclick = "toogle_SubmitBtn_State('" + submitID + "')" }) <span>@Html.DisplayFor(modelItem => item.Name)</span>
+                    </td>
+                </tr>
+                @Html.HiddenFor(x => item.SystemID)
+            }
+            <tr class="tr">
+                @Html.HiddenFor(x => ViewData["SystemWasSelected"])
+                <td>
+                    @Html.RadioButton("SelectedNode", "Dont know", new { @class = @class, id = "nodeDontKnow", onclick = "toogle_SubmitBtn_State('" + submitID + "')" }) <span>Затрудняюсь ответить</span>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" id="nodeSubmit" disabled="disabled" class="submit-disable" value="Выбрать" />
+    }
+}

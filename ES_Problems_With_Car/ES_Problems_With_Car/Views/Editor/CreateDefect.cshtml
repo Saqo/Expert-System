@@ -1,0 +1,50 @@
+﻿@model ES_Problems_With_Car.Car_Defects
+
+@{
+    ViewBag.Title = "CreateDefect";
+    ES_Problems_With_Car.Defect_Reasons reason = null;
+    var label = "Неисправность: ";
+}
+@if (ViewData["Reason"] != null)
+{
+    reason = ViewData["Reason"] as ES_Problems_With_Car.Defect_Reasons;
+    <span class="link-GoTo">@Html.ActionLink("< ПРИЗНАКИ НЕИСПРАВНОСТИ ", "CreateReasons", new { nodeID = reason.NodeID, PreviousReasonID = reason.PreviousReasonsID })</span>
+    <div>
+        <p>Признак неисправности автомобиля: @Html.DisplayFor(x => reason.Label)</p>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <ol class="custom-list">
+            <li>
+                @Html.Label(label)
+                @Html.TextBoxFor(m => m.Answer)
+                @if (reason != null)
+                {
+                    @Html.HiddenFor(m => m.ReasonID);
+                }
+            </li>
+        </ol>
+        <input type="submit" value="Добавить неисправность" />
+    </fieldset>
+}
+
+@if (ViewData["defects"] != null)
+{
+    <ul class="list-group">
+
+        @foreach (var defect in ViewData["defects"] as List<ES_Problems_With_Car.Car_Defects>)
+        {
+            <li class="list-group-item" onclick="showBtns(this,@defect.ID)">
+                <button class="btn btn-default unvisible @defect.ID" onclick="btnclick(@defect.ID,'node')">Выбрать</button>
+                <button class="btn btn-default unvisible @defect.ID" onclick="updateElem(@defect.ID)">Изменить</button>
+                <button class="btn btn-default unvisible @defect.ID" onclick="deleteElem(@defect.ID)">Удалить</button>
+                @Html.DisplayFor(x => defect.Answer)
+            </li>
+        }
+    </ul>
+}

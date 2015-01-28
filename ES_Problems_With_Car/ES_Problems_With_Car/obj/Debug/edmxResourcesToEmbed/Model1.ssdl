@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Exper_System_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Car_Defects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReasonID" Type="int" Nullable="false" />
+    <Property Name="IsSelected" Type="bit" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WasViewed" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Car_System_Nodes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SystemID" Type="int" Nullable="false" />
+    <Property Name="IsSelected" Type="bit" Nullable="false" />
+    <Property Name="WasViewed" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Car_Systems">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsSelected" Type="bit" Nullable="false" />
+    <Property Name="WasViewed" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Defect_Reasons">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NodeID" Type="int" Nullable="false" />
+    <Property Name="DiagnosisID" Type="int" />
+    <Property Name="PreviousReasonsID" Type="int" />
+    <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSelected" Type="bit" Nullable="false" />
+    <Property Name="WasViewed" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reasons_Correction_Methods">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DefectID" Type="int" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reasons_Diagnosis">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Car_Defec__Reaso__1BFD2C07">
+    <End Role="Defect_Reasons" Type="Self.Defect_Reasons" Multiplicity="1" />
+    <End Role="Car_Defects" Type="Self.Car_Defects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Defect_Reasons">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Car_Defects">
+        <PropertyRef Name="ReasonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Car_Syste__Syste__1273C1CD">
+    <End Role="Car_Systems" Type="Self.Car_Systems" Multiplicity="1" />
+    <End Role="Car_System_Nodes" Type="Self.Car_System_Nodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car_Systems">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Car_System_Nodes">
+        <PropertyRef Name="SystemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Defect_Re__Diagn__182C9B23">
+    <End Role="Reasons_Diagnosis" Type="Self.Reasons_Diagnosis" Multiplicity="0..1" />
+    <End Role="Defect_Reasons" Type="Self.Defect_Reasons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reasons_Diagnosis">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Defect_Reasons">
+        <PropertyRef Name="DiagnosisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Defect_Re__NodeI__173876EA">
+    <End Role="Car_System_Nodes" Type="Self.Car_System_Nodes" Multiplicity="1" />
+    <End Role="Defect_Reasons" Type="Self.Defect_Reasons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car_System_Nodes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Defect_Reasons">
+        <PropertyRef Name="NodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Defect_Re__Previ__1920BF5C">
+    <End Role="Defect_Reasons" Type="Self.Defect_Reasons" Multiplicity="0..1" />
+    <End Role="Defect_Reasons1" Type="Self.Defect_Reasons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Defect_Reasons">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Defect_Reasons1">
+        <PropertyRef Name="PreviousReasonsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reasons_C__Defec__1ED998B2">
+    <End Role="Car_Defects" Type="Self.Car_Defects" Multiplicity="1" />
+    <End Role="Reasons_Correction_Methods" Type="Self.Reasons_Correction_Methods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car_Defects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reasons_Correction_Methods">
+        <PropertyRef Name="DefectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Exper_System_dbModelContainer">
+    <EntitySet Name="Car_Defects" EntityType="Self.Car_Defects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Car_System_Nodes" EntityType="Self.Car_System_Nodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Car_Systems" EntityType="Self.Car_Systems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Defect_Reasons" EntityType="Self.Defect_Reasons" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reasons_Correction_Methods" EntityType="Self.Reasons_Correction_Methods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reasons_Diagnosis" EntityType="Self.Reasons_Diagnosis" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Car_Defec__Reaso__1BFD2C07" Association="Self.FK__Car_Defec__Reaso__1BFD2C07">
+      <End Role="Defect_Reasons" EntitySet="Defect_Reasons" />
+      <End Role="Car_Defects" EntitySet="Car_Defects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Car_Syste__Syste__1273C1CD" Association="Self.FK__Car_Syste__Syste__1273C1CD">
+      <End Role="Car_Systems" EntitySet="Car_Systems" />
+      <End Role="Car_System_Nodes" EntitySet="Car_System_Nodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Defect_Re__Diagn__182C9B23" Association="Self.FK__Defect_Re__Diagn__182C9B23">
+      <End Role="Reasons_Diagnosis" EntitySet="Reasons_Diagnosis" />
+      <End Role="Defect_Reasons" EntitySet="Defect_Reasons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Defect_Re__NodeI__173876EA" Association="Self.FK__Defect_Re__NodeI__173876EA">
+      <End Role="Car_System_Nodes" EntitySet="Car_System_Nodes" />
+      <End Role="Defect_Reasons" EntitySet="Defect_Reasons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Defect_Re__Previ__1920BF5C" Association="Self.FK__Defect_Re__Previ__1920BF5C">
+      <End Role="Defect_Reasons" EntitySet="Defect_Reasons" />
+      <End Role="Defect_Reasons1" EntitySet="Defect_Reasons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reasons_C__Defec__1ED998B2" Association="Self.FK__Reasons_C__Defec__1ED998B2">
+      <End Role="Car_Defects" EntitySet="Car_Defects" />
+      <End Role="Reasons_Correction_Methods" EntitySet="Reasons_Correction_Methods" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

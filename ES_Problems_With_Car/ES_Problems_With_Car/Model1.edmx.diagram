@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="14584971b57a4c209bb8747647998b90" Name="Diagram1">
+        <EntityTypeShape EntityType="Exper_System_dbModel.Car_Defects" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exper_System_dbModel.Car_System_Nodes" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exper_System_dbModel.Car_Systems" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exper_System_dbModel.Defect_Reasons" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exper_System_dbModel.Reasons_Correction_Methods" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exper_System_dbModel.Reasons_Diagnosis" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="Exper_System_dbModel.FK__Car_Defec__Reaso__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="Exper_System_dbModel.FK__Reasons_C__Defec__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="Exper_System_dbModel.FK__Car_Syste__Syste__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="Exper_System_dbModel.FK__Defect_Re__NodeI__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="Exper_System_dbModel.FK__Defect_Re__Diagn__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="Exper_System_dbModel.FK__Defect_Re__Previ__1920BF5C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
